@@ -1,11 +1,11 @@
-# $Id: Currency.pm 6400 2011-06-09 12:13:42Z chris $
+# $Id: Currency.pm 7373 2012-04-09 18:00:33Z chris $
 
 package WebService::Flixster::Currency;
 
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use base qw(Class::Accessor);
 

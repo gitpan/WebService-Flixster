@@ -1,4 +1,4 @@
-# $Id: Reviews.pm 7358 2012-04-09 00:25:17Z chris $
+# $Id: Reviews.pm 7373 2012-04-09 18:00:33Z chris $
 
 =head1 NAME
 
@@ -12,7 +12,7 @@ package WebService::Flixster::Reviews;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use base qw(Class::Accessor);
 

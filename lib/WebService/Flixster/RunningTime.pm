@@ -1,11 +1,11 @@
-# $Id: RunningTime.pm 6048 2011-01-30 21:54:05Z chris $
+# $Id: RunningTime.pm 7373 2012-04-09 18:00:33Z chris $
 
 package WebService::Flixster::RunningTime;
 
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Carp;
 our @CARP_NOT = qw(WebService::Movie WebService::Flixster::Movie);

@@ -1,4 +1,4 @@
-# $Id: Actor.pm 7366 2012-04-09 01:01:20Z chris $
+# $Id: Actor.pm 7375 2012-04-10 11:49:08Z chris $
 
 =head1 NAME
 
@@ -11,7 +11,7 @@ package WebService::Flixster::Actor;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use base qw(WebService::Flixster::Base);
 
@@ -155,9 +155,15 @@ sub _get_id {
 	$uri->host($self->_domain());
 	$uri->path(sprintf("/iphone/api/v1/actors/%d.json", $id));
 
-	my $content = $self->_ws()->_response_decoded_json(GET $uri->as_string());
+ 	my $content = $self->_ws()->_response_decoded_content(GET $uri->as_string());
 
-	if ($content->{'id'} ne $id) {
+ 	if ($content =~ m/^\s*$/) {
+ 	    croak "Resource not found";
+ 	}
+
+	my $json = $self->_ws()->_response_decoded_json(GET $uri->as_string());
+
+	if ($json->{'id'} ne $id) {
 	    die "id failed round trip"
 	}
 

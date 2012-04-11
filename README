@@ -1,4 +1,4 @@
-$Id: README 7361 2012-04-09 00:32:17Z chris $
+$Id: README 7377 2012-04-11 10:57:51Z chris $
 
 INTRODUCTION
 ============
@@ -20,7 +20,7 @@ DEPENDENCIES
 
 Class::Accessor
 Cache::FileCache
-DateTime::Duration
+DateTime::Format::Duration
 DateTime::Incomplete
 File::Spec::Functions
 HTML::Entities

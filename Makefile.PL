@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# $Id: Makefile.PL 7360 2012-04-09 00:29:01Z chris $
+# $Id: Makefile.PL 7377 2012-04-11 10:57:51Z chris $
 
 use ExtUtils::MakeMaker;
 
@@ -12,6 +12,7 @@ WriteMakefile(
     PREREQ_PM       => {
 	'Class::Accessor' => 0, 
 	'Cache::FileCache' => 0, 
+	'DateTime::Format::Duration' => 0, 
 	'DateTime::Incomplete' => 0, 
 	'File::Spec::Functions' => 0, 
 	'HTML::Entities' => 0,

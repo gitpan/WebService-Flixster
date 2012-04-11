@@ -1,11 +1,11 @@
-# $Id: Base.pm 6026 2011-01-28 15:39:49Z chris $
+# $Id: Base.pm 7373 2012-04-09 18:00:33Z chris $
 
 package WebService::Flixster::Base;
 
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use base qw(Class::Accessor);
 

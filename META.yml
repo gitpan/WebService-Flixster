@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               WebService-Flixster
-version:            0.01
+version:            0.02
 abstract:           OO Perl interface to flixster.com
 author:
     - Christopher Key <christopher.key@cantab.net>
@@ -13,6 +13,7 @@ build_requires:
 requires:
     Cache::FileCache:     0
     Class::Accessor:      0
+    DateTime::Format::Duration:  0
     DateTime::Incomplete:  0
     File::Spec::Functions:  0
     HTML::Entities:       0

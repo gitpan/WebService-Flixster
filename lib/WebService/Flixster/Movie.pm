@@ -1,4 +1,4 @@
-# $Id: Movie.pm 7356 2012-04-09 00:11:57Z chris $
+# $Id: Movie.pm 7375 2012-04-10 11:49:08Z chris $
 
 =head1 NAME
 
@@ -11,7 +11,7 @@ package WebService::Flixster::Movie;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use base qw(WebService::Flixster::Base);
 
@@ -383,9 +383,15 @@ sub _get_id {
 	$uri->host($self->_domain());
 	$uri->path(sprintf("/iphone/api/v1/movies/%d.json", $id));
 
-	my $content = $self->_ws()->_response_decoded_json(GET $uri->as_string());
+ 	my $content = $self->_ws()->_response_decoded_content(GET $uri->as_string());
 
-	if ($content->{'id'} ne $id) {
+ 	if ($content =~ m/^\s*$/) {
+ 	    croak "Resource not found";
+ 	}
+
+	my $json = $self->_ws()->_response_decoded_json(GET $uri->as_string());
+
+	if ($json->{'id'} ne $id) {
 	    die "id failed round trip"
 	}
 
@@ -407,16 +413,29 @@ sub _get_id {
 	if($response->code() eq "200") {
 	    my $id;
 	    if ( !(
-		      (($id) = $response->decoded_content() =~ m/movieid=(\d+)/) # in URL
-		      || (($id) = $response->decoded_content() =~ m/movieid\s*=\s*"(\d+)"/) # tag attribute
-		      || (($id) = $response->decoded_content() =~ m/'?movieId'?\s*:\s*(\d+)/) # javascript
+		      (($id) = $response->decoded_content() =~ m/movieid=(\d+)/) || # in URL
+		      (($id) = $response->decoded_content() =~ m/movieid\s*=\s*"(\d+)"/) || # tag attribute
+		      (($id) = $response->decoded_content() =~ m/'?movieId'?\s*:\s*(\d+)/) # javascript
 		 ) ) {
 
 		die "Failed to extract movie id";
 
 	    }
 
+	    # Some imdbids resolve to a flixster id with no associated data.  Detect these.
+	    my $uri = URI->new();
+	    $uri->scheme("http");
+	    $uri->host($self->_domain());
+	    $uri->path(sprintf("/iphone/api/v1/movies/%d.json", $id));
+
+	    my $content = $self->_ws()->_response_decoded_content(GET $uri->as_string());
+
+	    if ($content =~ m/^\s*$/) {
+		croak "Resource not found";
+	    }
+
 	    return $id;
+
 	} elsif ($response->code eq "404") {
 	    croak "Resource not found";
 	} else {

@@ -1,11 +1,11 @@
-# $Id: Stub.pm 6375 2011-06-08 17:23:42Z chris $
+# $Id: Stub.pm 7373 2012-04-09 18:00:33Z chris $
 
 package WebService::Flixster::Actor::Stub;
 
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use base qw(WebService::Flixster::Actor);
 
